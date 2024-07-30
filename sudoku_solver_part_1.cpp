@@ -120,36 +120,21 @@ void GenerateValidNineByNineGrids(std::vector<int> & grid, int index)
     }
     else
     {
-        if (grid[index] == 0)
+        for (int i = 1; i <= 9; ++i)
         {
-            for (int i = 1; i <= 9; ++i)
+            grid[index] = i;
+            if (IsNineByNineSudokuLegal(grid) == true)
             {
-                grid[index] = i;
-                if (IsNineByNineSudokuLegal(grid) == true)
-                {
-                    GenerateValidNineByNineGrids(grid, index + 1);
-                }
+                GenerateValidNineByNineGrids(grid, index + 1);
             }
-            grid[index] = 0;
         }
-        else
-        {
-            GenerateValidNineByNineGrids(grid, index + 1);
-        }
+        grid[index] = 0;
     }
 }
 
 void GenerateAllValidNineByNineGrids()
 {
-    std::vector<int> grid{8, 7, 6, 9, 0, 0, 0, 0, 0,
-                          0, 1, 0, 0, 0, 6, 0, 0, 0,
-                          0, 4, 0, 3, 0, 5, 8, 0, 0,
-                          4, 0, 0, 0, 0, 0, 2, 1, 0,
-                          0, 9, 0, 5, 0, 0, 0, 0, 0,
-                          0, 5, 0, 0, 4, 0, 3, 0, 6,
-                          0, 2, 9, 0, 0, 0, 0, 0, 8,
-                          0, 0, 4, 6, 9, 0, 1, 7, 3,
-                          0, 0, 0, 0, 0, 1, 0, 0, 4};
+    std::vector<int> grid(81, 0);
     GenerateValidNineByNineGrids(grid, 0);
 }
 
